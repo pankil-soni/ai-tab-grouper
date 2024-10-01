@@ -1,17 +1,25 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from anthropic import Anthropic
+import google.generativeai as genai
 import os
 from dotenv import load_dotenv
 import json
+import time
 
 load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
 
-anthropic = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+api_key = os.getenv("GOOGLE_API_KEY")
 
+genai.configure(api_key=api_key)
+config = genai.GenerationConfig(temperature=0, top_p=1, max_output_tokens=1024)
+model = genai.GenerativeModel(
+    "gemini-1.5-flash",
+    system_instruction="You are an AI assistant that helps group browser tabs into categories. Always return valid JSON arrays containing objects with 'title', 'tabIds', and 'color' fields.",
+    generation_config=config,
+)
 
 @app.route("/", methods=["GET"])
 def hello():
@@ -54,23 +62,24 @@ Tabs:
 Return only the JSON array without any explanation."""
 
     try:
-        print("Querying Claude AI...")
-        response = anthropic.messages.create(
-            model="claude-3-opus-latest",
-            max_tokens=1024,
-            temperature=0,
-            top_p=1,
-            system="You are an AI assistant that helps group browser tabs into categories. Always return valid JSON arrays containing objects with 'title', 'tabIds', and 'color' fields.",
-            messages=[{"role": "user", "content": prompt}],
-        )
+        print("Querying gemini AI...")
+        start_time = time.time()
+        response = model.generate_content(prompt)
 
         # Extract JSON from response
-        print("Claude response received:\n" + response.content[0].text)
-        result = json.loads(response.content[0].text)
-        print("Claude response parsed:\n" + str(result))
+        print("Gemini response time in seconds: ", time.time() - start_time)
+        print("Gemini response received:\n" + response.text)
+        text = response.text
+        text = text.replace("```json", "")
+        text = text.replace("```", "")
+        text = text.strip()
+        print("Gemini response stripped:\n" + text)
+        result = json.loads(text)
+        print("Gemini response parsed:\n" + str(result))
         return jsonify(result)
 
     except Exception as e:
+        print(e)
         return jsonify({"error": str(e)}), 500
 
 
