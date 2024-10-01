@@ -1,9 +1,16 @@
 {
   "manifest_version": 3,
   "name": "AI Tabs Grouper",
-  "version": "1.0.0",
-  "description": "Intelligently group your tabs using AI",
-  "permissions": ["tabs", "tabGroups", "storage"],
+  "version": "1.1.0",
+  "description": "Intelligently group and manage your tabs using AI",
+  "permissions": [
+    "tabs",
+    "tabGroups",
+    "storage",
+    "commands",
+    "idle",
+    "notifications"
+  ],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
@@ -19,6 +26,20 @@
   },
   "background": {
     "service_worker": "background.js"
+  },
+  "commands": {
+    "quick-group": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+G"
+      },
+      "description": "Quick group tabs"
+    },
+    "toggle-group": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+T"
+      },
+      "description": "Toggle current tab group"
+    }
   },
   "host_permissions": ["http://localhost:5000/*"]
 }
