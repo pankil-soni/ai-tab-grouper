@@ -17,11 +17,10 @@ You can find and install the AI Tab Grouper extension from the Chrome Web Store:
 
 ## 📸 Screenshots
 
-![extension-home](screenshots/extension-home.png)
-![settings-modal](screenshots/settings-modal.png)
-![auto-ai-grouping](screenshots/auto-ai-grouping.png)
-![website-based-grouping](screenshots/website-based-grouping.png)
-![smart-rules](screenshots/smart-rules.png)
+![extension-home](screenshots/home.png)
+![settings-modal](screenshots/settings.png)
+![ai-grouping](screenshots/grouping.png)
+
 
 ## 🛠 Installation
 
@@ -74,6 +73,10 @@ Version 1.1.0
 
 - Added support for saving and applying templates for quick tab organization.
 - Fixed a bug with tab grouping when using the "By Activity" method.
+
+Version 1.1.1
+
+- Removed unwanted idle permissions from manifest.json
 
 ## About authors
 
