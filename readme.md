@@ -4,7 +4,7 @@ AI Tab Grouper is a powerful browser extension designed to help users manage the
 
 ## 🌐 Published Extension
 
-You can find and install the AI Tab Grouper extension from the Chrome Web Store: [AI Tab Grouper](https://chromewebstore.google.com/detail/ai-tabs-grouper/egidcfnmmpdbnppnknhgogimavpakflc)
+You can find and install the AI Tab Grouper extension from the Chrome Web Store: [AI Tab Grouper](https://chromewebstore.google.com/detail/ai-tabs-grouper/lchmibpgifelmdmdaoejkibjpepkddbb)
 
 ## ✨ Features
 
